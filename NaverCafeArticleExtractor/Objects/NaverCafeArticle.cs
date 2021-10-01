@@ -27,5 +27,19 @@ namespace NaverCafeArticleExtractor.Objects
         /// DateTime for wrote article.
         /// </summary>
         public DateTime WrotedDateTime { get; set; }
+
+        public string[] ToStringArray()
+        {
+            var res = new string[]
+            {
+                Id.ToString(),
+                Title,
+                WriterId,
+                WriterNickname,
+                WrotedDateTime.ToString("yyyy-MM-dd hh:mm:ss")
+            };
+
+            return res;
+        }
     }
 }
