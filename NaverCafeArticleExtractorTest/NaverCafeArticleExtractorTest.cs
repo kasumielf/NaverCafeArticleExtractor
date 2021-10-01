@@ -10,7 +10,8 @@ namespace NaverCafeArticleParserTest
         [TestMethod]
         public async Task Success_BasicExtractAsync()
         {
-            var builder = new NaverCafeRestAPIRequestParameterBuilder("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
+            var builder = new NaverCafeRestAPIRequestParameterBuilder();
+            builder.SetUrl("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
             builder.Search.SetClubId(19480246).SetMenuId(24);
             var res = await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder);
 
@@ -21,7 +22,8 @@ namespace NaverCafeArticleParserTest
         [TestMethod]
         public async Task Success_SetPerPage_ExtractAsync()
         {
-            var builder = new NaverCafeRestAPIRequestParameterBuilder("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
+            var builder = new NaverCafeRestAPIRequestParameterBuilder();
+            builder.SetUrl("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
             builder.Search.SetClubId(19480246).SetMenuId(24).SetPerPage(10);
             var res = await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder);
 
