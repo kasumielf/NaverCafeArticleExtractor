@@ -1,12 +1,15 @@
 # Introduce
-네이버 카페의 REST API를 이용해 카페 내 특정 게시판의 게시물 리스트를 가져오는 .NET Core Library 및 CLI 코드
+* Naver Cafe REST API Extractor
 
 # Requirement and Dependencies
 * Microfost .NET 5
 * Newtonsoft.JSON(13.0.1)
 
-# Parameters
+# Projects
+* NaverCafeArticleExtractor is .NET Library. You can include this library for using other .NET 5 projects.
+* Test project is simple examples of using library.
 
+# Parameters
 Using parameter builder class.
 
 ```csharp
