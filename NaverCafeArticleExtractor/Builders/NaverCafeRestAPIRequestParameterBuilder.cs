@@ -8,19 +8,29 @@ namespace NaverCafeArticleExtractor.Builders
     /// </summary>
     public class NaverCafeRestAPIRequestParameterBuilder
     {
-        private readonly string _apiUrl;
+        private Uri _apiUri;
         public Search Search { get; init; }
 
-        public NaverCafeRestAPIRequestParameterBuilder(string apiUrl)
+        public NaverCafeRestAPIRequestParameterBuilder()
         {
-            _apiUrl = apiUrl;
-
             Search = new Search();
+        }
+
+        public NaverCafeRestAPIRequestParameterBuilder SetUrl(string url)
+        {
+            if(Uri.TryCreate(url, UriKind.Absolute, out _apiUri))
+            {
+                return this;
+            }
+            else
+            {
+                throw new UriFormatException($"Invalid uri formats from {url}");
+            }
         }
 
         public Uri ToUri()
         {
-            return new Uri($"{_apiUrl}?{Search.ToQueryString()}");
+            return new Uri($"{_apiUri}?{Search.ToQueryString()}");
         }
     }
 }
