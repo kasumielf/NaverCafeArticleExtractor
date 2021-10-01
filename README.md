@@ -25,6 +25,7 @@ builder.Search
 ```
 
 # Usage
+## Library
 1. Place parameters builder.
 2. Using extract static class by async.
 3. Using extracted articles.
@@ -41,3 +42,11 @@ Task.Run(async () =>
     var articles = await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder);
 }).Wait();
 ```
+## Console Extractor
+### Command Line Arguments
+1. -u, --url : Naver Cafe REST API URL(Required)
+2. -c, --clubid : Naver Cafe clubId(Required)
+3. -m, --menuid : Naver Cafe MenuId in specifie Cafe(Club)(Required)
+4. -p, --per : Article per one page.(Not Required)
+5. -q, --query : REST API Query Type(Not Required)
+6. -a, --all : Extract all articles or only setted page(Warning : It would be takes a long time. )(Not Required, default is false)
