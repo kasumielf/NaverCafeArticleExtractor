@@ -1,31 +1,61 @@
-﻿using NaverCafeArticleExtractor.Builders;
+﻿using CommandLine;
+using NaverCafeArticleExtractor.Builders;
+using NaverCafeArticleExtractor.Objects;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NaverCafeArticleConsoleExtractor
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            var builder = new NaverCafeRestAPIRequestParameterBuilder("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
+            int currentPage = 0;
 
-            builder.Search
-                .SetClubId(19480246)            // Naver Cafe clubId.
-                .SetMenuId(24)                  // MenuId for extract articles.
-                .SetPage(3)                     // Page number
-                .SetPerPage(50)                 // Article per one page.
-                .SetQueryType("lastArticle");   // REST API Query Type
+            bool all = false;
+            var builder = new NaverCafeRestAPIRequestParameterBuilder();
 
-            Task.Run(async () =>
+            var p = CommandLine.Parser.Default.ParseArguments<Arguments>(args).WithParsed<Arguments>(o =>
+            {
+                builder.SetUrl(o.Url)
+                    .Search
+                    .SetClubId(o.ClubId)
+                    .SetMenuId(o.MenuId)
+                    .SetPage(currentPage);
+
+                if (o.PerPage > 0)
+                {
+                    builder.Search.SetPerPage(o.PerPage);
+                }
+
+                if (!string.IsNullOrEmpty(o.QueryType))
+                {
+                    builder.Search.SetQueryType(o.QueryType);
+                }
+
+                all = o.All ?? false;
+            });
+
+            var list = new List<NaverCafeArticle>();
+
+            while (true)
             {
                 var articles = await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder);
 
-                foreach (var article in articles)
+                list.AddRange(articles);
+
+                if (articles == null || articles.Count <= 0 || all == false)
                 {
-                    System.Console.WriteLine(article.Title);
+                    break;
                 }
 
-            }).Wait();
+                builder.Search.SetPage(++currentPage);
+            }
+
+            foreach (var article in list)
+            {
+                System.Console.WriteLine(string.Join('\t', article.ToStringArray()));
+            }
         }
     }
 }
