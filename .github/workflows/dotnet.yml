@@ -20,4 +20,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build NaverCafeArticleExtractor --no-restore
+      run: dotnet build --no-restore --output Output
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: ReleaseArtifacts
+        path: output/*.*
