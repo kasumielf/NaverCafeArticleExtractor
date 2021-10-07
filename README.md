@@ -7,8 +7,8 @@
 * CommandLineParser(2.8.0)
 
 # Projects
-* NaverCafeArticleExtractor is .NET Library. You can include this library for using other .NET 5 projects.
-* Test project is simple examples of using library.
+* NaverCafeArticleExtractor is .NET Library for extract articles of Naver Cafe. You can include this library for using other .NET 5 projects.
+* Test project is simple examples for using library.
 
 # Parameters
 Using parameter builder class.
@@ -26,7 +26,7 @@ builder.Search
 
 # Usage
 ## Library
-1. Place parameters builder.
+1. Place parameter builder.
 2. Using extract static class by async.
 3. Using extracted articles.
 
@@ -39,7 +39,7 @@ builder.Search
 
 Task.Run(async () =>
 {
-    var articles = await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder);
+    IList<NaverCafeArticle> articles = await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder);
 }).Wait();
 ```
 ## Console Extractor
