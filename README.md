@@ -2,7 +2,7 @@
 * Naver Cafe REST API Extractor Library and Console Extractor
 
 # Requirement and Dependencies
-* Microfost .NET 5
+* Microsoft .NET 5
 * Newtonsoft.JSON(13.0.1)
 * CommandLineParser(2.8.0)
 
