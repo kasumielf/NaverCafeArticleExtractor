@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NaverCafeArticleExtractor.Builders;
 using System.Threading.Tasks;
 
-namespace NaverCafeArticleParserTest
+namespace NaverCafeArticleExtractorTest
 {
     [TestClass]
     public class NaverCafeArticleExtractorTest
