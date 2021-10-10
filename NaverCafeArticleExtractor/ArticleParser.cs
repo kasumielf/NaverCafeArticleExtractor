@@ -31,5 +31,28 @@ namespace NaverCafeArticleExtractor
 
             return list;
         }
+
+        public static async Task<IList<NaverCafeArticle>> ExtractAllAsync(NaverCafeRestAPIRequestParameterBuilder builder)
+        {
+            var list = new List<NaverCafeArticle>();
+
+            int page = 1;
+
+            while (true)
+            {
+                var articles = await ExtractAsync(builder);
+
+                list.AddRange(articles);
+
+                if (articles == null || articles.Count <= 0)
+                {
+                    break;
+                }
+
+                builder.Search.SetPage(++page);
+            }
+
+            return list;
+        }
     }
 }

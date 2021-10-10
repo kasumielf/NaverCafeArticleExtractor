@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NaverCafeArticleExtractor.Builders;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NaverCafeArticleExtractorTest
@@ -29,6 +30,20 @@ namespace NaverCafeArticleExtractorTest
 
             Assert.IsNotNull(res);
             Assert.AreEqual(res.Count, 10);
+        }
+
+        [TestMethod]
+        public async Task Success_ExtractAllAsync()
+        {
+            var builder = new NaverCafeRestAPIRequestParameterBuilder();
+            builder.SetUrl("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
+            builder.Search.SetClubId(19480246).SetMenuId(176);
+            var res = await NaverCafeArticleExtractor.Extractor.ExtractAllAsync(builder);
+
+            var duplicated = res.GroupBy(x => x.Id).Any(g => g.Count() > 1);
+
+            Assert.IsNotNull(res);
+            Assert.IsFalse(duplicated);
         }
     }
 }
