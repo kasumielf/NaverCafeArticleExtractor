@@ -38,18 +38,13 @@ namespace NaverCafeArticleConsoleExtractor
 
             var list = new List<NaverCafeArticle>();
 
-            while (true)
+            if (all)
             {
-                var articles = await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder);
-
-                list.AddRange(articles);
-
-                if (articles == null || articles.Count <= 0 || all == false)
-                {
-                    break;
-                }
-
-                builder.Search.SetPage(++currentPage);
+                list.AddRange(await NaverCafeArticleExtractor.Extractor.ExtractAllAsync(builder));
+            }
+            else
+            {
+                list.AddRange(await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder));
             }
 
             foreach (var article in list)
