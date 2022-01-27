@@ -2,6 +2,7 @@
 using NaverCafeArticleExtractor.Objects;
 using NaverCafeArticleExtractor.Responses;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -32,17 +33,17 @@ namespace NaverCafeArticleExtractor
             return list;
         }
 
-        public static async Task<IList<NaverCafeArticle>> ExtractAllAsync(NaverCafeRestAPIRequestParameterBuilder builder)
+        public static async Task ExtractAllAsync(
+            NaverCafeRestAPIRequestParameterBuilder builder, 
+            Action<IList<NaverCafeArticle>> loopCallback)
         {
-            var list = new List<NaverCafeArticle>();
-
             int page = 1;
 
             while (true)
             {
                 var articles = await ExtractAsync(builder);
 
-                list.AddRange(articles);
+                loopCallback(articles);
 
                 if (articles == null || articles.Count <= 0)
                 {
@@ -51,8 +52,6 @@ namespace NaverCafeArticleExtractor
 
                 builder.Search.SetPage(++page);
             }
-
-            return list;
         }
     }
 }

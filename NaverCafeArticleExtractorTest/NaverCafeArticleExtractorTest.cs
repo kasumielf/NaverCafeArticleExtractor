@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NaverCafeArticleExtractor.Builders;
+using NaverCafeArticleExtractor.Objects;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,7 +40,12 @@ namespace NaverCafeArticleExtractorTest
             var builder = new NaverCafeRestAPIRequestParameterBuilder();
             builder.SetUrl("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
             builder.Search.SetClubId(19480246).SetMenuId(176);
-            var res = await NaverCafeArticleExtractor.Extractor.ExtractAllAsync(builder);
+            var res = new List<NaverCafeArticle>();
+                
+            await NaverCafeArticleExtractor.Extractor.ExtractAllAsync(builder, (list) => 
+            {
+                res.AddRange(list);
+            });
 
             var duplicated = res.GroupBy(x => x.Id).Any(g => g.Count() > 1);
 

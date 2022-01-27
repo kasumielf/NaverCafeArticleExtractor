@@ -36,17 +36,19 @@ namespace NaverCafeArticleConsoleExtractor
                 all = o.All ?? false;
             });
 
-            var list = new List<NaverCafeArticle>();
-
             if (all)
             {
-                list.AddRange(await NaverCafeArticleExtractor.Extractor.ExtractAllAsync(builder));
+                await NaverCafeArticleExtractor.Extractor.ExtractAllAsync(builder, PrintLists);
             }
             else
             {
-                list.AddRange(await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder));
+                var list = await NaverCafeArticleExtractor.Extractor.ExtractAsync(builder);
+                PrintLists(list);
             }
+        }
 
+        static void PrintLists(IList<NaverCafeArticle> list)
+        {
             foreach (var article in list)
             {
                 System.Console.WriteLine(string.Join('\t', article.ToStringArray()));
