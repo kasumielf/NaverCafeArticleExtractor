@@ -24,7 +24,9 @@ namespace NaverCafeArticleExtractor.Builders
             }
             else
             {
-                throw new UriFormatException($"Invalid uri formats from {url}");
+                Uri.TryCreate("https://apis.naver.com/cafe-web/cafe2/ArticleList.json", UriKind.Absolute, out _apiUri);
+
+                return this;
             }
         }
 
