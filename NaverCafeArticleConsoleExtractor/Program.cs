@@ -17,6 +17,11 @@ namespace NaverCafeArticleConsoleExtractor
 
             var p = CommandLine.Parser.Default.ParseArguments<Arguments>(args).WithParsed<Arguments>(o =>
             {
+                if (string.IsNullOrEmpty(o.Url)) 
+                {
+                    o.Url = "https://apis.naver.com/cafe-web/cafe2/ArticleList.json";
+                }
+
                 builder.SetUrl(o.Url)
                     .Search
                     .SetClubId(o.ClubId)

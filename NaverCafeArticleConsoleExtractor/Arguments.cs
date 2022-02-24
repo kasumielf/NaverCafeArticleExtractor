@@ -4,7 +4,7 @@ namespace NaverCafeArticleConsoleExtractor
 {
     public class Arguments
     {
-        [Option('u', "url", Required = true, HelpText = "Naver Cafe REST API URL")]
+        [Option('u', "url", Required = false, HelpText = "Naver Cafe REST API URL")]
         public string Url { get; set; }
         [Option('c', "clubid", Required = true, HelpText = "Naver Cafe clubId.")]
         public long ClubId { get; set; }
