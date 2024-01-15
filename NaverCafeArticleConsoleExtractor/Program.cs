@@ -19,7 +19,7 @@ namespace NaverCafeArticleConsoleExtractor
             {
                 if (string.IsNullOrEmpty(o.Url)) 
                 {
-                    o.Url = "https://apis.naver.com/cafe-web/cafe2/ArticleList.json";
+                    o.Url = "https://apis.naver.com/cafe-web/cafe2/ArticleListV2dot1.json";
                 }
 
                 builder.SetUrl(o.Url)

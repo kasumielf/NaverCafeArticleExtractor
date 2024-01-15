@@ -24,7 +24,7 @@ namespace NaverCafeArticleExtractor.Builders
             }
             else
             {
-                Uri.TryCreate("https://apis.naver.com/cafe-web/cafe2/ArticleList.json", UriKind.Absolute, out _apiUri);
+                Uri.TryCreate("https://apis.naver.com/cafe-web/cafe2/ArticleListV2dot1.json", UriKind.Absolute, out _apiUri);
 
                 return this;
             }
