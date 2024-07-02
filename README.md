@@ -14,7 +14,7 @@
 Using parameter builder class.
 
 ```csharp
-var builder = new NaverCafeRestAPIRequestParameterBuilder("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
+var builder = new NaverCafeRestAPIRequestParameterBuilder("https://apis.naver.com/cafe-web/cafe2/ArticleListV2dot1.json");
 
 builder.Search
     .SetClubId(19480246)            // Naver Cafe clubId.
@@ -31,7 +31,7 @@ builder.Search
 3. Using extracted articles.
 
 ```csharp
-var builder = new NaverCafeRestAPIRequestParameterBuilder("https://apis.naver.com/cafe-web/cafe2/ArticleList.json");
+var builder = new NaverCafeRestAPIRequestParameterBuilder("https://apis.naver.com/cafe-web/cafe2/ArticleListV2dot1.json");
 
 builder.Search
     .SetClubId(19480246)
